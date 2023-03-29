@@ -1,5 +1,6 @@
 using EvertekBackend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,9 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 var app = builder.Build();
 
+app.UseDeveloperExceptionPage();
+
+
 app.UseCors(options => options.WithOrigins("http://localhost:4200")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
@@ -32,6 +36,26 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+//IWebHostEnvironment env = app.Services.GetRequiredService<IWebHostEnvironment>();
+//if (env.IsDevelopment())
+//{
+//    app.UseDeveloperExceptionPage();
+//}
+
+//// for the wwwroot/uploads folder
+//string uploadsDir = Path.Combine(env.WebRootPath, "uploads");
+//if (!Directory.Exists(uploadsDir))
+//    Directory.CreateDirectory(uploadsDir);
+
+//app.UseStaticFiles(new StaticFileOptions()
+//{
+//    RequestPath = "/images",
+//    FileProvider = new PhysicalFileProvider(uploadsDir)
+//});
+
+app.UseRouting();
 
 app.UseAuthorization();
 

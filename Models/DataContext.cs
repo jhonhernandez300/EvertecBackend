@@ -14,6 +14,6 @@ namespace EvertekBackend.Models
         {
         }
 
-        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
     }
 }

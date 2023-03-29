@@ -1,0 +1,6 @@
+E:\Punto net Core codigo de ejemplo\EvertekBackend\TestProject1\bin\Debug\net6.0\CoverletSourceRootsMapping
+E:\Punto net Core codigo de ejemplo\EvertekBackend\TestProject1\obj\Debug\net6.0\TestProject1.csproj.AssemblyReference.cache
+E:\Punto net Core codigo de ejemplo\EvertekBackend\TestProject1\obj\Debug\net6.0\TestProject1.GeneratedMSBuildEditorConfig.editorconfig
+E:\Punto net Core codigo de ejemplo\EvertekBackend\TestProject1\obj\Debug\net6.0\TestProject1.AssemblyInfoInputs.cache
+E:\Punto net Core codigo de ejemplo\EvertekBackend\TestProject1\obj\Debug\net6.0\TestProject1.AssemblyInfo.cs
+E:\Punto net Core codigo de ejemplo\EvertekBackend\TestProject1\obj\Debug\net6.0\TestProject1.csproj.CoreCompileInputs.cache

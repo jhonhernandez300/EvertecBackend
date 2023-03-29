@@ -39,7 +39,7 @@ namespace EvertekBackend.Controllers
             {
                 _logger.LogDebug("aa");
                 _logger.LogInformation("+++++ Obteniendo todos los empleados de la base de datos  ++++++++");
-                var result = await dataContext.Employees.ToListAsync();
+                var result = await dataContext.Employee.ToListAsync();
                 _logger.LogInformation("Resultados: ");
                 _logger.LogInformation(result.Count().ToString());
 
@@ -72,7 +72,7 @@ namespace EvertekBackend.Controllers
             try
             {
                 _logger.LogInformation("+++++ Obteniendo el empleado de la base de datos  ++++++++");
-                var result = await dataContext.Employees.FirstOrDefaultAsync(x => x.LastNames == lastNames);                               
+                var result = await dataContext.Employee.FirstOrDefaultAsync(x => x.LastNames == lastNames);                               
 
                 if (result != null)
                 {
@@ -95,16 +95,16 @@ namespace EvertekBackend.Controllers
             }            
         }
 
-        // GET: Employee/GetEmployee/5
-        [HttpGet("GetEmployeeByIdEmployee/{IdEmployee}")]
-        public async Task<IActionResult> GetEmployeeByIdEmployee(int IdEmployee)
+        // GET: Employee/GetEmployeeById/5
+        [HttpGet("GetEmployeeById/{IdEmployee}")]
+        public async Task<IActionResult> GetEmployeeById(int IdEmployee)
         {
-            _logger.LogInformation("********************        Ingresando a GetEmployeeByIdEmployee          *****************");
+            _logger.LogInformation("********************        Ingresando a GetEmployeeById          *****************");
             _logger.LogInformation("Se recibe el {IdEmployee}", IdEmployee);
             try
             {
                 _logger.LogInformation("+++++ Obteniendo el empleado de la base de datos  ++++++++");
-                var result = await dataContext.Employees.FirstOrDefaultAsync(x => x.IdEmployee == IdEmployee);
+                var result = await dataContext.Employee.FirstOrDefaultAsync(x => x.IdEmployee == IdEmployee);
 
                 if (result != null)
                 {
@@ -127,7 +127,7 @@ namespace EvertekBackend.Controllers
             }
         }
 
-        private void LogEmployeeInformation(Employees result)
+        private void LogEmployeeInformation(Employee result)
         {            
             _logger.LogInformation("Resultados: ");
             _logger.LogInformation("Names {result.Names}", result.Names);
@@ -139,7 +139,7 @@ namespace EvertekBackend.Controllers
             _logger.LogInformation("DateOfBirth {result.DateOfBirth}", result.DateOfBirth);            
         }
 
-        private void LogEmployeeInformationWithId(Employees result)
+        private void LogEmployeeInformationWithId(Employee result)
         {
             _logger.LogInformation("IdEmployee: {result.IdEmployee}", result.IdEmployee);
             LogEmployeeInformation(result);
@@ -148,7 +148,7 @@ namespace EvertekBackend.Controllers
 
         // POST: Employee/SaveEmployee       
         [HttpPost("SaveEmployee")]
-        public async Task<ActionResult<Employees>> SaveEmployee([FromBody] Employees employee)
+        public async Task<ActionResult<Employee>> SaveEmployee([FromBody] Employee employee)
         {
             _logger.LogInformation("********************        Ingresando a SaveEmployee          *****************");
             _logger.LogInformation("Se recibe el employee: ");
@@ -163,7 +163,7 @@ namespace EvertekBackend.Controllers
             try
             {
                 _logger.LogInformation("+++++ Guardando el empleado en la base de datos  ++++++++");
-                dataContext.Employees.Add(employee);
+                dataContext.Employee.Add(employee);
                 await dataContext.SaveChangesAsync();                
                 _logger.LogInformation("Se retorna Ok");
                 return Ok(employee);
@@ -178,8 +178,8 @@ namespace EvertekBackend.Controllers
         }
 
         // UPDATE: Employee/ActualizarColaborador        
-        [HttpPatch("UpdateEmployee")]
-        public async Task<ActionResult<Employees>> UpdateEmployee([FromBody] Employees employee)
+        [HttpPut("UpdateEmployee")]
+        public async Task<ActionResult<Employee>> UpdateEmployee([FromBody] Employee employee)
         {
             _logger.LogInformation("********************        Ingresando a UpdateEmployee          *****************");
             _logger.LogInformation("Se recibe el employee: ");
@@ -188,7 +188,7 @@ namespace EvertekBackend.Controllers
             try
             {
                 _logger.LogInformation("+++++ Buscando el empleado en la base de datos  ++++++++");
-                var result = await dataContext.Employees.FirstOrDefaultAsync(b => b.IdEmployee == employee.IdEmployee);
+                var result = await dataContext.Employee.FirstOrDefaultAsync(b => b.IdEmployee == employee.IdEmployee);
 
                 if (result == null)
                 {
@@ -229,7 +229,7 @@ namespace EvertekBackend.Controllers
 
         // DELETE: Employee/DeleteEmployee/5
         [HttpDelete("DeleteEmployee/{id}")]
-        public async Task<ActionResult<Employees>> DeleteEmployee(int id)
+        public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {
             _logger.LogInformation("********************        Ingresando a DeleteEmployee          *****************");
             _logger.LogInformation("Se recibe el {id}", id);
@@ -237,7 +237,7 @@ namespace EvertekBackend.Controllers
             try
             {
                 _logger.LogInformation("+++++ Buscando el empleado en la base de datos  ++++++++");
-                var employee = await dataContext.Employees.FindAsync(id);
+                var employee = await dataContext.Employee.FindAsync(id);
 
                 if (employee == null)
                 {
@@ -245,7 +245,7 @@ namespace EvertekBackend.Controllers
                     return NotFound();
                 }
 
-                dataContext.Employees.Remove(employee);
+                dataContext.Employee.Remove(employee);
                 await dataContext.SaveChangesAsync();
                 _logger.LogInformation("Empleado elimnado. Se retorna Ok");
                 return Ok(employee);
